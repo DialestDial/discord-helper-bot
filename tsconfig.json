@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "module": "CommonJS",
+    "rootDir": "./src",
+    "outDir": "./built",
+    "allowJs": true,
+    "resolveJsonModule": true,
+    "target": "esnext",
+    "esModuleInterop": true,
+    "noImplicitAny": true
+  },
+  "exclude": ["./tests/", "index.d.ts"]
+}
