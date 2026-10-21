@@ -2,7 +2,7 @@ declare global {
   namespace NodeJS {
     interface ProcessEnv {
       ownerID: string;
-      token: string;
+      helper_bot_token: string;
 
       MEMORY_AVAILABLE: string;
       PWD: string;
