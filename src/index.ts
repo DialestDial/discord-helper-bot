@@ -1,19 +1,20 @@
-/*import util from "util";
-*/import { Client, Collection, DefaultWebSocketManagerOptions } from "discord.js";
+import util from "util";
+import { Client, Collection } from "discord.js";
 import { command, event } from "./DTS/files";
 import intents from "./modules/intents";
+import partials from "./modules/partials";
 import { readdirSync } from "fs";
 
-/*
 process.on("uncaughtException", (p) => {
   console.error(`Uncaught Exception Error:\n${util.inspect(p, { depth: 2 })}`);
 });
 process.on("unhandledRejection", (p) => {
   console.error(`Uncaught Promise Error:\n${util.inspect(p, { depth: 2 })}`);
 });
-*/
+
 const client = new Client({
   intents,
+  partials,
 });
 readdirSync("./built/events/")
   .filter((f) => f.endsWith(".js"))
@@ -21,11 +22,12 @@ readdirSync("./built/events/")
     const event: event = require(`./events/${name}`);
     if (event.once === true)
       client.once(event.name, (...listener: any[]) =>
-        event.execute(client, ...listener)
+        event.execute(client, ...listener),
       );
     else
       client.on(event.name, (...listener: any[]) =>
-        event.execute(client, ...listener)
+        event.execute(client, ...listener),
       );
   });
+  
 client.login(process.env.helper_bot_token);

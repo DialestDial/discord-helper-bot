@@ -7,7 +7,9 @@
     "resolveJsonModule": true,
     "target": "esnext",
     "esModuleInterop": true,
-    "noImplicitAny": true
+    "noImplicitAny": true,
+    "skipLibCheck": true
   },
-  "exclude": ["./tests/", "index.d.ts"]
+  "include": ["./src/**/*"],
+  "exclude": ["./tests/", "index.d.ts", "node_modules"]
 }

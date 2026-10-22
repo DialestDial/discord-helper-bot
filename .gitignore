@@ -21,7 +21,7 @@ Thumbs.db
 /old
 /src/commands/1Prefix
 /src/events/1Prefix
-/index.d.ts
+.env
 
 coverage
 

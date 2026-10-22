@@ -1,0 +1,21 @@
+import { Message } from "discord.js";
+export = {
+  name: "
+	description: {
+		en: "",
+	},
+	dm: 
+	args: 
+	usage: "
+	aliases: [
+	hiddenAliases: [
+	guild: 
+	allow: 
+	channels: 
+	execute: async (message: Message, args: string[]) => {
+
+  },
+	punishment: async (message: Message, args: string[]) => {
+
+  },
+}
