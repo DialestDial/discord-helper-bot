@@ -19,10 +19,10 @@ Thumbs.db
 /node_modules
 /tests
 /old
-/src/commands/1Prefix
+/built
+/src/text_commands/1Prefix
 /src/events/1Prefix
 .env
-
 coverage
 
 logs

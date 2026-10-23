@@ -8,6 +8,8 @@ const discord_js_1 = require("discord.js");
 const intents_1 = __importDefault(require("./modules/intents"));
 const partials_1 = __importDefault(require("./modules/partials"));
 const fs_1 = require("fs");
+const dotenv_1 = require("dotenv");
+(0, dotenv_1.config)();
 process.on("uncaughtException", (p) => {
     console.error(`Uncaught Exception Error:\n${util_1.default.inspect(p, { depth: 2 })}`);
 });
@@ -26,10 +28,5 @@ const client = new discord_js_1.Client({
         client.once(event.name, (...listener) => event.execute(client, ...listener));
     else
         client.on(event.name, (...listener) => event.execute(client, ...listener));
-});
-client.on("messageCreate", (m) => {
-    if (!m.author.bot && m.channel.isSendable()) {
-        m.channel.send("Heya!!!! :3");
-    }
 });
 client.login(process.env.helper_bot_token);

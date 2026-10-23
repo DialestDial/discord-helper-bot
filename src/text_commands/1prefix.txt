@@ -5,17 +5,14 @@ export = {
 		en: "",
 	},
 	dm: 
+	guild: 
 	args: 
 	usage: "
 	aliases: [
 	hiddenAliases: [
-	guild: 
 	allow: 
-	channels: 
 	execute: async (message: Message, args: string[]) => {
-
-  },
-	punishment: async (message: Message, args: string[]) => {
-
+		if (!message.channel.isSendable()) return;
+		
   },
 }

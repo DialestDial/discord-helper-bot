@@ -1,9 +1,11 @@
 import util from "util";
 import { Client, Collection } from "discord.js";
-import { command, event } from "./DTS/files";
+import { event } from "./DTS/files";
 import intents from "./modules/intents";
 import partials from "./modules/partials";
 import { readdirSync } from "fs";
+import { config } from "dotenv";
+config();
 
 process.on("uncaughtException", (p) => {
   console.error(`Uncaught Exception Error:\n${util.inspect(p, { depth: 2 })}`);
@@ -29,5 +31,5 @@ readdirSync("./built/events/")
         event.execute(client, ...listener),
       );
   });
-  
+
 client.login(process.env.helper_bot_token);

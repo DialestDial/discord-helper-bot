@@ -1,7 +1,9 @@
 import { Client, Message, PermissionsString } from "discord.js";
-export type command = {
+export type text_command = {
   name: string;
   description: string;
+  dm: boolean;
+  guild: boolean;
   args: boolean;
   usage: string;
   aliases: string[];
