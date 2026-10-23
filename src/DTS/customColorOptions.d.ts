@@ -5,6 +5,5 @@ export type customColorOptions = {
   prefixC: string;
   prefixR?: string;
   position?: number;
-  role?: string;
   embed?: string;
 };

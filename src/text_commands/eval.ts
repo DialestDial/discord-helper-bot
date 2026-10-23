@@ -41,7 +41,7 @@ export = {
       const embed: MessageCreateOptions = {
         embeds: [
           {
-            title: "Evaluate",
+            title: "Mission accomplished :saluting_face:",
             color: random > 2 ? 0x0000ff : random > 1 ? 0x00ff00 : 0x00ffff,
             fields: [
               {
