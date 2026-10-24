@@ -17,7 +17,10 @@ export = {
     const clean = (_code: string) =>
       _code.replace(/`/g, "`‎").replace(/@/g, "@‎");
     const cleanError = (_code: any) =>
-      clean(inspect(_code)).split("    at eval (eval at execute")[0].trim();
+      clean(inspect(_code))
+        .split("at eval (eval at execute")[0]
+        .split("at Object.execute")[0]
+        .trim();
     const big = () => {
       (message.channel as SendableChannels).send({
         embeds: [
