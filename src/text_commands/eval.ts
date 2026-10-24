@@ -16,6 +16,8 @@ export = {
     if (!message.channel.isSendable()) return;
     const clean = (_code: string) =>
       _code.replace(/`/g, "`‎").replace(/@/g, "@‎");
+    const cleanError = (_code: any) =>
+      clean(inspect(_code)).split("    at eval (eval at execute")[0].trim();
     const big = () => {
       (message.channel as SendableChannels).send({
         embeds: [
@@ -51,7 +53,7 @@ export = {
               },
               {
                 name: "Output:",
-                value: "```js\n" + clean(inspect(evaled)) + "```",
+                value: "```js\n" + cleanError(evaled) + "```",
                 inline: false,
               },
             ],
@@ -63,7 +65,7 @@ export = {
           .send({
             embeds: [
               {
-                title: "Evaluate",
+                title: "Mission failed :broken_heart:",
                 color: 0xff0000,
                 fields: [
                   {
@@ -73,7 +75,7 @@ export = {
                   },
                   {
                     name: "Error:",
-                    value: "```js\n" + clean(inspect(e)) + "\n```",
+                    value: "```js\n" + cleanError(e) + "\n```",
                     inline: false,
                   },
                 ],
@@ -97,7 +99,7 @@ export = {
                 },
                 {
                   name: "Error:",
-                  value: "```js\n" + clean(inspect(e)) + "\n```",
+                  value: "```js\n" + cleanError(e) + "\n```",
                   inline: false,
                 },
               ],
