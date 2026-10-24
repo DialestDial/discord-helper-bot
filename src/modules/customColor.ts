@@ -11,6 +11,31 @@ import rateLimitAsText from "./rateLimitAsText";
 export = async (options: customColorOptions) => {
   const { _channel, prefixC, prefixR, message, position, embed } = options;
 
+  async function cleanRoles(oldRole: Role | undefined) {
+    if (oldRole) {
+      await (message.member as GuildMember).roles
+        .remove(oldRole)
+        .catch(() =>
+          console.error(
+            `I don't have permissions to remove the role with the ID ${oldRole} from a user in ${oldRole.guild}`,
+          ),
+        );
+    }
+    (message.guild as Guild).roles.cache.forEach((r) => {
+      if (
+        (r.name.startsWith(prefixC) ||
+          (prefixR && r.name.startsWith(prefixR))) &&
+        !r.members.size
+      ) {
+        r.delete().catch(() =>
+          console.error(
+            `I don't have permissions to delete the role with the ID ${r} from ${r.guild}`,
+          ),
+        );
+      }
+    });
+  }
+
   if (
     //If it's the correct channel and the author is a human
     (Array.isArray(_channel)
@@ -20,7 +45,16 @@ export = async (options: customColorOptions) => {
   ) {
     const { content } = message,
       color = parseInt(content.toLowerCase().slice(1).trim(), 16);
-    if (
+    if (message.content === "reset" || message.content === "r" ) {
+      const cuRole: Role | undefined =
+        //current role that will later be removed
+        (message.member as GuildMember).roles.cache.find(
+          (r) =>
+            r.name.startsWith(prefixC) ||
+            (prefixR && r.name.startsWith(prefixR)),
+        );
+      cleanRoles(cuRole);
+    } else if (
       content.search(/^#[a-f|\d]{6}$/i) !== -1 &&
       color > 0 &&
       color < 0x1000000 &&
@@ -52,34 +86,6 @@ export = async (options: customColorOptions) => {
         }, timeout || 5000);
       }
 
-      async function cleanRoles(
-        member: GuildMember,
-        oldRole: Role | undefined,
-      ) {
-        if (oldRole) {
-          await member.roles
-            .remove(oldRole)
-            .catch(() =>
-              console.error(
-                `I don't have permissions to remove the role with the ID ${oldRole} from a user in ${oldRole.guild}`,
-              ),
-            );
-        }
-        (message.guild as Guild).roles.cache.forEach((r) => {
-          if (
-            (r.name.startsWith(prefixC) ||
-              (prefixR && r.name.startsWith(prefixR))) &&
-            !r.members.size
-          ) {
-            r.delete().catch(() =>
-              console.error(
-                `I don't have permissions to delete the role with the ID ${r} from ${r.guild}`,
-              ),
-            );
-          }
-        });
-      }
-
       async function setColor(type: string, prefix: string) {
         const cuRole: Role | undefined =
           //current role that will later be removed
@@ -106,7 +112,7 @@ export = async (options: customColorOptions) => {
                 async (r) => {
                   await (message.member as GuildMember).roles.add(r);
 
-                  cleanRoles(message.member as GuildMember, cuRole);
+                  cleanRoles(cuRole);
                   message.delete();
                   editEmbed(r.colors.primaryColor);
                 },
@@ -115,7 +121,7 @@ export = async (options: customColorOptions) => {
         } else {
           (cuRole as Role).setColors({ primaryColor: color }).then(
             () => {
-              cleanRoles(message.member as GuildMember, cuRole);
+              cleanRoles(cuRole);
               message.delete();
               editEmbed((cuRole as Role).colors.primaryColor);
             },
