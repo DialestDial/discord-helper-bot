@@ -21,7 +21,7 @@ export = async (options: customColorOptions) => {
     const { content } = message,
       color = parseInt(content.toLowerCase().slice(1).trim(), 16);
     if (
-      content.startsWith("#") &&
+      content.search(/^#[a-f|\d]{6}$/i) !== -1 &&
       color > 0 &&
       color < 0x1000000 &&
       content.length === 7
