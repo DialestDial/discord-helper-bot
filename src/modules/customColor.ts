@@ -45,7 +45,7 @@ export = async (options: customColorOptions) => {
   ) {
     const { content } = message,
       color = parseInt(content.toLowerCase().slice(1).trim(), 16);
-    if (message.content === "reset" || message.content === "r" ) {
+    if (message.content === "reset" || message.content === "r") {
       const cuRole: Role | undefined =
         //current role that will later be removed
         (message.member as GuildMember).roles.cache.find(
@@ -54,6 +54,7 @@ export = async (options: customColorOptions) => {
             (prefixR && r.name.startsWith(prefixR)),
         );
       cleanRoles(cuRole);
+      message.delete();
     } else if (
       content.search(/^#[a-f|\d]{6}$/i) !== -1 &&
       color > 0 &&
