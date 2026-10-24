@@ -95,7 +95,7 @@ export = async (options: customColorOptions) => {
           );
 
         if (type === "c") {
-          let newRole = await (message.guild as Guild).roles.cache.find(
+          let newRole = (message.guild as Guild).roles.cache.find(
             (r) => r.name === message.content.toUpperCase(),
           );
           if (newRole) {

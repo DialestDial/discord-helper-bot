@@ -1,5 +1,5 @@
 import { Client, Message } from "discord.js";
-import messageManager from "../modules/messageManager";
+import messageManager from "../util/messageManager";
 export = {
   name: "messageCreate",
   once: false,
