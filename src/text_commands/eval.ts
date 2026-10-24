@@ -87,7 +87,7 @@ export = {
         .send({
           embeds: [
             {
-              title: "Evaluate",
+              title: "Mission failed :broken_heart:",
               color: 0xff0000,
               fields: [
                 {
