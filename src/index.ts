@@ -8,13 +8,18 @@ import { config } from "dotenv";
 config();
 
 process.on("uncaughtException", (p) => {
-  console.error(`Uncaught Exception Error:\n${util.inspect(p, { depth: null })}`);
+  console.error(
+    `Uncaught Exception Error:\n${util.inspect(p, { depth: null })}`,
+  );
 });
 process.on("unhandledRejection", (p) => {
   console.error(`Uncaught Promise Error:\n${util.inspect(p, { depth: null })}`);
 });
 
 const client = new Client({
+  rest: {
+    api: process.env.useProxy ? process.env.proxyURL : "https://discord.com/",
+  },
   intents,
   partials,
 });
