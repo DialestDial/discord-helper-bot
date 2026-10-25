@@ -25,19 +25,21 @@ export = {
         .split("at Object.execute")[0]
         .trim();
     const big = () => {
-      (message.channel as SendableChannels).send({
-        embeds: [
-          {
-            title: "Eval",
-            color: 0xff0000,
-            description: "There was an error sending the error :/",
-          },
-        ],
-      });
+      (message.channel as SendableChannels)
+        .send({
+          embeds: [
+            {
+              title: "Eval",
+              color: 0xff0000,
+              description: "There was an error sending the error :/",
+            },
+          ],
+        })
+        .catch(() => {});
     };
     try {
       const random = Math.random() * 3;
-      let evaled: any = await eval("(async () => {\n" + arg + "\nreturn undefined;})()");
+      let evaled: any = await eval("(async () => {\n" + arg + "\n})()");
       const embed: MessageCreateOptions = {
         embeds: [
           {
