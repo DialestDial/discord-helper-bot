@@ -37,7 +37,7 @@ export = async (message: Message, normal: boolean) => {
     message?.content?.toLowerCase()?.startsWith(p),
   );
   const noPrefix = message.content.slice(prefix?.length).trim();
-  const args = noPrefix.split(/ +/g);
+  const args = noPrefix.split(/\s+/g);
   const commandName = (args.shift() || "").toLowerCase();
   const arg = noPrefix.slice(commandName.length).trim();
 

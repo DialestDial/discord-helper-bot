@@ -1,5 +1,5 @@
 import util from "util";
-import { Client, Collection } from "discord.js";
+import { Client } from "discord.js";
 import { event } from "./DTS/files";
 import intents from "./util/constants/intents";
 import partials from "./util/constants/partials";
