@@ -8,6 +8,7 @@
     "target": "esnext",
     "esModuleInterop": true,
     "noImplicitAny": true,
+    "strictNullChecks": true,
     "skipLibCheck": true
   },
   "include": ["./src/**/*"],

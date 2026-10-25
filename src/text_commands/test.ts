@@ -1,4 +1,5 @@
 import { Message } from "discord.js";
+import { text_command } from "../DTS/files";
 export = {
   name: "test",
   description: {
@@ -15,4 +16,4 @@ export = {
     if (!message.channel.isSendable()) return;
     message.channel.send("Hi :3");
   },
-};
+} as text_command;

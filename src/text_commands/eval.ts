@@ -2,22 +2,25 @@ import { Message, MessageCreateOptions } from "discord.js";
 import { inspect } from "util";
 import { prefixes } from "../config.json";
 import { SendableChannels } from "discord.js";
+import { text_command } from "../DTS/files";
 export = {
   name: "eval",
-  description: "Executes JavaScript code",
+  description: {
+    en: "Executes JavaScript code",
+  },
   dm: true,
-  args: false,
+  args: null,
   guild: true,
   usage: "d?eval <valid JavaScript code>",
   aliases: [],
   hiddenAliases: ["e"],
   allow: false,
-  execute: async (message: Message) => {
+  execute: async (message: Message, arg: string) => {
     if (!message.channel.isSendable()) return;
     const clean = (_code: string) =>
       _code.replace(/`/g, "`‎").replace(/@/g, "@‎");
-    const cleanError = (_code: any) =>
-      clean(inspect(_code))
+    const cleanOut = (_code: any) =>
+      clean(inspect(_code, { depth: null }))
         .split("at eval (eval at execute")[0]
         .split("at Object.execute")[0]
         .trim();
@@ -32,17 +35,9 @@ export = {
         ],
       });
     };
-    const noPrefix = message.content
-      .slice(
-        prefixes.find((p: string) =>
-          message.content.toLowerCase().startsWith(p),
-        )?.length,
-      )
-      .trim();
-    const code = noPrefix.slice(noPrefix.split(" ")[0].length).trim();
     try {
       const random = Math.random() * 3;
-      let evaled: unknown = eval(code);
+      let evaled: unknown = eval(arg);
       const embed: MessageCreateOptions = {
         embeds: [
           {
@@ -51,12 +46,12 @@ export = {
             fields: [
               {
                 name: "Input:",
-                value: "```js\n" + clean(code) + "```",
+                value: "```js\n" + clean(arg) + "```",
                 inline: false,
               },
               {
                 name: "Output:",
-                value: "```js\n" + cleanError(evaled) + "```",
+                value: "```js\n" + cleanOut(evaled) + "```",
                 inline: false,
               },
             ],
@@ -73,12 +68,12 @@ export = {
                 fields: [
                   {
                     name: "Input:",
-                    value: "```js\n" + clean(code) + "\n```",
+                    value: "```js\n" + clean(arg) + "\n```",
                     inline: false,
                   },
                   {
                     name: "Error:",
-                    value: "```js\n" + cleanError(e) + "\n```",
+                    value: "```js\n" + cleanOut(e) + "\n```",
                     inline: false,
                   },
                 ],
@@ -97,12 +92,12 @@ export = {
               fields: [
                 {
                   name: "Input:",
-                  value: "```js\n" + clean(code) + "\n```",
+                  value: "```js\n" + clean(arg) + "\n```",
                   inline: false,
                 },
                 {
                   name: "Error:",
-                  value: "```js\n" + cleanError(e) + "\n```",
+                  value: "```js\n" + cleanOut(e) + "\n```",
                   inline: false,
                 },
               ],
@@ -112,4 +107,4 @@ export = {
         .catch(big);
     }
   },
-};
+} as text_command;

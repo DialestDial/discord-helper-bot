@@ -1,8 +1,8 @@
 import util from "util";
 import { Client, Collection } from "discord.js";
 import { event } from "./DTS/files";
-import intents from "./util/intents";
-import partials from "./util/partials";
+import intents from "./util/constants/intents";
+import partials from "./util/constants/partials";
 import { readdirSync } from "fs";
 import { config } from "dotenv";
 config();

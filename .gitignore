@@ -20,8 +20,7 @@ Thumbs.db
 /tests
 /old
 /built
-/src/text_commands/1Prefix
-/src/events/1Prefix
+**/1Prefix
 .env
 coverage
 
