@@ -7,7 +7,6 @@ import {
 import { readdirSync } from "fs";
 import { prefixes } from "../config.json";
 import { text_command } from "../DTS/files";
-import { noDeprecation } from "process";
 export = async (message: Message, normal: boolean) => {
   const commands: text_command[] = readdirSync("./built/text_commands/")
     .filter((f) => f.endsWith(".js"))
