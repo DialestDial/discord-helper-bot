@@ -19,7 +19,8 @@
   "homepage": "https://github.com/DialestDial/discord-helper-bot#readme",
   "dependencies": {
     "discord.js": "^14.27.0",
-    "dotenv": "^18.0.8"
+    "dotenv": "^18.0.8",
+    "node-fetch": "^3.3.2"
   },
   "devDependencies": {
     "@types/node": "^26.6.5"

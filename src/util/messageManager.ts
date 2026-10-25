@@ -10,9 +10,7 @@ import { text_command } from "../DTS/files";
 export = async (message: Message, normal: boolean) => {
   const commands: text_command[] = readdirSync("./built/text_commands/")
     .filter((f) => f.endsWith(".js"))
-    .map((name) => {
-      return require(`../text_commands/${name}`);
-    });
+    .map((name) => require(`../text_commands/${name}`));
   function error(description: string, title?: string, noDel?: boolean) {
     if (message.channel.isSendable()) {
       message.channel
@@ -37,9 +35,9 @@ export = async (message: Message, normal: boolean) => {
     message?.content?.toLowerCase()?.startsWith(p),
   );
   const noPrefix = message.content.slice(prefix?.length).trim();
-  const args = noPrefix.split(/\s+/g);
+  const args = noPrefix.split(/\s+/g); //args === true in a text_command
   const commandName = (args.shift() || "").toLowerCase();
-  const arg = noPrefix.slice(commandName.length).trim();
+  const arg = noPrefix.slice(commandName.length).trim(); //args === null in a text_command
 
   const text_command: text_command | undefined = commands.find(
     (cmd) =>

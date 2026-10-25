@@ -37,7 +37,13 @@ export = {
     };
     try {
       const random = Math.random() * 3;
-      let evaled: unknown = eval(arg);
+      let evaled: any = eval("(async () => {\n" + arg + "\n})()");
+      if (
+        evaled &&
+        (typeof evaled === "object" || typeof evaled === "function") &&
+        typeof evaled.then === "function"
+      )
+        evaled = await evaled;
       const embed: MessageCreateOptions = {
         embeds: [
           {

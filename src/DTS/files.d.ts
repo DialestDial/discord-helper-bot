@@ -1,4 +1,10 @@
-import { Client, Message, PermissionsString } from "discord.js";
+import {
+  Client,
+  Interaction,
+  Message,
+  PermissionsString,
+  RESTPostAPIChatInputApplicationCommandsJSONBody,
+} from "discord.js";
 
 export type dictionary = {
   en: string;
@@ -16,6 +22,10 @@ export type text_command = {
   allow?: PermissionsString[] | boolean;
   channels?: string[] | null;
   execute(message: Message, args?: string[] | string): Promise<any>;
+};
+export type slash_command = {
+  info: RESTPostAPIChatInputApplicationCommandsJSONBody;
+  execute(interaction: ChatInputCommandInteraction): Promise<any>;
 };
 export type event = {
   name: string;

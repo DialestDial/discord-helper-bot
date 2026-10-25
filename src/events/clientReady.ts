@@ -2,7 +2,7 @@ import { Client } from "discord.js";
 import { event } from "../DTS/files";
 export = {
   name: "clientReady",
-  once: false,
+  once: true,
   execute: async (client: Client) => {
     console.log("Ready!!!");
   },

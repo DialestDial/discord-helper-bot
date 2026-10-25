@@ -20,6 +20,7 @@ Thumbs.db
 /tests
 /old
 /built
+**/1prefix
 **/1Prefix
 .env
 coverage
