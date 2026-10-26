@@ -10,7 +10,7 @@ export = {
   info: {
     name: "eval",
     description: "Executes JavaScript code (Dial only)",
-    default_member_permissions: "0",
+    default_member_permissions: null,
     contexts: [0, 1, 2],
     options: [
       {
@@ -48,7 +48,7 @@ export = {
       };
       try {
         const random = Math.random() * 3;
-        let evaled: any = await eval("(async () => {\nreturn " + code + "\n})()");
+        let evaled: any = await eval("(async () => {\ " + code + "\n})()");
         const embed: InteractionReplyOptions = {
           embeds: [
             {
