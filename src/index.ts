@@ -18,9 +18,12 @@ process.on("unhandledRejection", (p) => {
 
 const client = new Client({
   rest: {
-    api: process.env.useProxy ? process.env.proxyURL : "https://discord.com/",
+    api:
+      process.env.useProxy === "1"
+        ? process.env.proxyURL
+        : "https://discord.com/api",
     headers: {
-      proxy_token: process.env.proxy_token as string,
+      proxy_token: process.env.proxy_token,
     },
   },
   intents,

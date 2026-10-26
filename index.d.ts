@@ -1,21 +1,11 @@
 declare global {
   namespace NodeJS {
     interface ProcessEnv {
-
-
-      MEMORY_AVAILABLE: string;
-      PWD: string;
-      PORT: string;
-      NODE_ENV: string;
-      NODE_HOME: string;
-      HOME: string;
-      SHLVL: string;
-      WEB_MEMORY: string;
-      WEB_CONCURRENCY: string;
-      PS1: string;
-      PATH: string;
-      DYNO: string;
-      _: string;
+      ownerid: string;
+      helper_bot_token: string;
+      proxyURL: string;
+      proxy_token: string;
+      useProxy: string;
     }
   }
 }

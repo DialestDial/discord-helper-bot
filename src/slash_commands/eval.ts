@@ -9,7 +9,16 @@ import { inspect } from "util";
 export = {
   info: {
     name: "eval",
-    description: "Executes JavaScript code",
+    description: "Executes JavaScript code (Dial only)",
+    default_member_permissions: "0",
+    options: [
+      {
+        name: "code",
+        type: 3,
+        description: "The code to execute",
+        required: true,
+      },
+    ],
   },
   execute: async (interaction: ChatInputCommandInteraction) => {
     if (interaction.user.id !== process.env.ownerid) {

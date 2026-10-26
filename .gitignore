@@ -24,6 +24,7 @@ Thumbs.db
 **/1Prefix
 .env
 coverage
+index.d.ts
 
 logs
 *.log
