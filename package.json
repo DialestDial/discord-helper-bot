@@ -5,7 +5,8 @@
   "main": "./built/index.js",
   "scripts": {
     "clean": "rmdir /s /q built",
-    "test": "rmdir /s /q built & tsc & node built & rmdir /s /q built"
+    "test": "rmdir /s /q built & tsc & node built & rmdir /s /q built",
+    "add": "rmdir /s /q built & git add -A"
   },
   "repository": {
     "type": "git",

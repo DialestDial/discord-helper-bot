@@ -19,7 +19,6 @@ Thumbs.db
 /node_modules
 /tests
 /old
-/built
 **/1prefix
 **/1Prefix
 .env
