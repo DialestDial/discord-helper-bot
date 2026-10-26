@@ -48,7 +48,7 @@ export = {
       };
       try {
         const random = Math.random() * 3;
-        let evaled: any = await eval("(async () => {\n" + code + "\n})()");
+        let evaled: any = await eval("(async () => {\nreturn " + code + "\n})()");
         const embed: InteractionReplyOptions = {
           embeds: [
             {
