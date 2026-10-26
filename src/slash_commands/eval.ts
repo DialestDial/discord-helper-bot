@@ -11,6 +11,7 @@ export = {
     name: "eval",
     description: "Executes JavaScript code (Dial only)",
     default_member_permissions: "0",
+    contexts: [0, 1, 2],
     options: [
       {
         name: "code",
