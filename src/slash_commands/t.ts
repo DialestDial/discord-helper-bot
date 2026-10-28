@@ -77,10 +77,10 @@ export = {
           "The correct order for the parameters is:\n`+` or `-` to go forward or back in time respectively, defaults to `+`.\n\
 Any combination of years, months, days, hours, minutes and seconds, followed by their respective suffix (`n` represents months).\n\
 The unit you want the date rounded at, in UTC time. `Y`, `N`, `D`, `H` or `M` but in uppercase.\n\
-[Discord's flags for timestamps](https://gist.github.com/LeviSnoot/d9147767abeef2f770e9ddcd91eb85aa), with `:` preceding them\n\
+[Discord's flags for timestamps](<https://gist.github.com/LeviSnoot/d9147767abeef2f770e9ddcd91eb85aa>), with `:` preceding them\n\
 `e` if you want to make the message only visible for you. Here are some examples:\n\
-`3n6hM`, `-2d70s:R`, `50yY:te`" + (help?.groups ? "" : "\n-# Tip: you can use the parameter `help-show` if you want everyone to be able to see this message"),
-         flags: help?.groups ? ["SuppressEmbeds", "Ephemeral"] : ["Ephemeral"]
+`3n6hM`, `-2d70s:R`, `50yY:te`" + (help?.groups ? "" : "\n\n-# Tip: you can use the parameter `help-show` if you want everyone to be able to see this message"),
+         flags: help?.groups ? undefined : ["Ephemeral"]
         }
     );
   }}
