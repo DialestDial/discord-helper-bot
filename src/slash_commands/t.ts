@@ -46,15 +46,15 @@ export = {
 
       switch (round) {
         case "Y":
-          time.setUTCMonth(1);
+          time.setMonth(1);
         case "N":
-          time.setUTCDate(1);
+          time.setDate(1);
         case "D":
-          time.setUTCHours(0);
+          time.setHours(0);
         case "H":
-          time.setUTCMinutes(0);
+          time.setMinutes(0);
         case "M":
-          time.setUTCSeconds(0);
+          time.setSeconds(0);
           break;
       }
 
