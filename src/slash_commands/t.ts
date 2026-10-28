@@ -18,8 +18,8 @@ export = {
   },
   execute: async (interaction: ChatInputCommandInteraction) => {
     const reg =
-    /^(?<sign>[+-])?(?<years>[0-9]+?(?=y))?y?(?<months>[0-9]+?(?=n))?n?(?<days>[0-9]+?(?=d))?(?<hours>[0-9]+?(?=h))?h?(?<minutes>[0-9]+?(?=m))?m?(?<seconds>[0-9]+?(?=s))?s?(?<round>[YNDHM])?(?<flag>:[tTdDfFR])?(?<ephemeral>e)?$/;
-    const parameters = interaction.options
+          /^(?<sign>[+-])?(?<years>[0-9]+?y)?(?<months>[0-9]+?n)?(?<days>[0-9]+?d)?(?<hours>[0-9]+?h)?(?<minutes>[0-9]+?m)?(?<seconds>[0-9]+?s)?(?<round>[Y|N|D|H|M])?(?<flag>:[tTdDfFR])?(?<ephemeral>e)?$/;
+      const parameters = interaction.options
       .getString("options")
       ?.match(reg)?.groups;
     if (parameters) {
