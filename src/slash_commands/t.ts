@@ -70,6 +70,7 @@ export = {
     } else { //Change the.? by . and an explicit type
       const help = interaction.options.getString("options")?.match(/^help(-show)?$/);
       //Send the correct syntax for the parameters, adding an error warning if the parameter isn't exactly "help" or "help-show"
+      console.log(require("inspect").default(help, {depth: null}));
       interaction.reply(
         {content: (help
           ? ""
