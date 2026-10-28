@@ -81,7 +81,7 @@ The unit you want the date rounded at, in UTC time. `Y`, `N`, `D`, `H` or `M` bu
 `e` if you want to make the message only visible for you. Here are some examples:\n\
 `3n6hM`, `-2d70s:R`, `50yY:te`" + (help?.groups ? "" : "\n-# Tip: you can use the parameter `help-show` if you want everyone to be able to see this message"),
          flags: ["SuppressEmbeds", help?.groups ? undefined: "Ephemeral"]
-        );
-    }
-  },
+        }
+    );
+  }
 } satisfies slash_command;
