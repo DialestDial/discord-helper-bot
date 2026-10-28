@@ -33,6 +33,7 @@ export = {
       let { round, ephemeral } = parameters;
       let flag = parameters.flag || "";
 
+      try {
       let time = new Date(
         Temporal.Now.instant().toZonedDateTimeISO("UTC").add({
           years,
@@ -62,6 +63,10 @@ export = {
         content: `<t:${Math.floor(time.getTime() / 1000)}${flag}>`,
         flags: ephemeral ? ["Ephemeral"] : undefined,
       });
+      } catch (e) {
+        interaction.reply({content: "Don't you think that's a little overkill?",
+                           flags: ["Ephemeral"]});
+      }
     } else {
       //Send the correct syntax for the parameters, adding an error warning if the parameter isn't exactly "help"
       interaction.reply(
