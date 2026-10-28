@@ -68,9 +68,8 @@ export = {
                            flags: ["Ephemeral"]});
       }
     } else { //Change the.? by . and an explicit type
-      const help = interaction.options.getString("options")?.match(/^help(-show)?$/);
+      const help = interaction.options.getString("options")?.match(/^help(?<show>-show)?$/);
       //Send the correct syntax for the parameters, adding an error warning if the parameter isn't exactly "help" or "help-show"
-      console.log(require("util").inspect(help, {depth: null}));
       interaction.reply(
         {content: (help
           ? ""
@@ -81,7 +80,7 @@ The unit you want the date rounded at, in UTC time. `Y`, `N`, `D`, `H` or `M` bu
 [Discord's flags for timestamps](<https://gist.github.com/LeviSnoot/d9147767abeef2f770e9ddcd91eb85aa>), with `:` preceding them\n\
 `e` if you want to make the message only visible for you. Here are some examples:\n\
 `3n6hM`, `-2d70s:R`, `50yY:te`" + (help?.groups ? "" : "\n\n-# Tip: you can use the parameter `help-show` if you want everyone to be able to see this message"),
-         flags: help?.groups ? [] : ["Ephemeral"]
+         flags: help?.groups?.show ? undefined : ["Ephemeral"]
         }
     );
   }}
