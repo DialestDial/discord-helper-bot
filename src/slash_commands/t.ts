@@ -24,12 +24,12 @@ export = {
       ?.match(reg)?.groups;
     if (parameters) {
       let sign = parameters.sign === "-" ? -1 : 1;
-      let years = Number(parameters.years) * sign || 0;
-      let months = Number(parameters.months) * sign || 0;
-      let days = Number(parameters.days) * sign || 0;
-      let hours = Number(parameters.hours) * sign || 0;
-      let minutes = Number(parameters.minutes) * sign || 0;
-      let seconds = Number(parameters.seconds) * sign || 0;
+      let years = Number(parameters.years?.slice(0, -1)) * sign || 0;
+      let months = Number(parameters.months?.slice(0, -1)) * sign || 0;
+      let days = Number(parameters.days?.slice(0, -1)) * sign || 0;
+      let hours = Number(parameters.hours?.slice(0, -1)) * sign || 0;
+      let minutes = Number(parameters.minutes?.slice(0, -1)) * sign || 0;
+      let seconds = Number(parameters.seconds?.slice(0, -1)) * sign || 0;
       let { round, ephemeral } = parameters;
       let flag = parameters.flag || "";
 
