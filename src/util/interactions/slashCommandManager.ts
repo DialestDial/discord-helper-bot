@@ -33,7 +33,7 @@ export = async (interaction: ChatInputCommandInteraction) => {
     interaction.client.users.cache
       .get(process.env.ownerid as string)
       ?.send(
-        `There was an error with the slash command \`${slash_command.info.name}\``,
+        `There was an error with the slash command \`/${slash_command.info.name}\``,
       );
   }
 
