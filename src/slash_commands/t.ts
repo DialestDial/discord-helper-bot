@@ -22,7 +22,6 @@ export = {
     const parameters = interaction.options
       .getString("options")
       ?.match(reg)?.groups;
-    console.log(interaction.options.getString("options"));
     if (parameters) {
       let sign = parameters.sign === "-" ? -1 : 1;
       let years = Number(parameters.years?.slice(0, -1)) * sign || 0;
