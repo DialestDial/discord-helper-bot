@@ -67,8 +67,8 @@ export = {
         interaction.reply({content: "Don't you think that's a little overkill?",
                            flags: ["Ephemeral"]});
       }
-    } else {
-      const help = interaction.options.getString("options").match(/^help(-show)?$/);
+    } else { //Change the.? by . and an explicit type
+      const help = interaction.options.getString("options")?.match(/^help(-show)?$/);
       //Send the correct syntax for the parameters, adding an error warning if the parameter isn't exactly "help" or "help-show"
       interaction.reply(
         {content: (help
