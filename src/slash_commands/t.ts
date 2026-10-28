@@ -83,5 +83,5 @@ The unit you want the date rounded at, in UTC time. `Y`, `N`, `D`, `H` or `M` bu
          flags: ["SuppressEmbeds", help?.groups ? undefined: "Ephemeral"]
         }
     );
-  }
+  }}
 } satisfies slash_command;
