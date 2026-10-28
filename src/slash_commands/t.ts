@@ -34,7 +34,7 @@ export = {
       let flag = parameters.flag || "";
 
       let time = new Date(
-        Temporal.Now.instant().add({
+        Temporal.Now.instant().toZonedDateTimeISO("UTC").add({
           years,
           months,
           days,
