@@ -15,7 +15,7 @@ export = {
           title: "Here you go!",
           description: `IP #1: ${process.env.aomcOliverIp}
 IP #2: ${process.env.aomcDioriteIp}
-IP #3: ${process.env.aomcRawIp
+IP #3: ${process.env.aomcRawIp}
 
 Seed: ${process.env.aomcSeed}`
         }]
