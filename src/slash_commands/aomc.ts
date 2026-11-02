@@ -12,7 +12,7 @@ export = {
       {
         embeds: [{
           color: 0xc0c0c0,
-          title: "Here you go!,
+          title: "Here you go!",
           description: `IP #1: ${process.env.aomcOliverIp}
 IP #2: ${process.env.aomcDioriteIp}
 IP #3: ${process.env.aomcRawIp
