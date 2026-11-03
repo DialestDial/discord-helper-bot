@@ -8,17 +8,9 @@ export = {
     contexts: [0, 1, 2],
   },
   execute: async (interaction: ChatInputCommandInteraction) => {
-    interaction.reply(
-      {
-        embeds: [{
-          color: 0xc0c0c0,
-          title: "Here you go!",
-          description: "IP #1: `" + process.env.aomcOliverIp +
+    interaction.reply("IP #1: `" + process.env.aomcOliverIp +
 "`\nIP #2: `" + process.env.aomcDioriteIp +
 "`\nIP #3: `" + process.env.aomcRawIp +
-"`\n\nSeed: `" + process.env.aomcSeed + "`"
-        }]
-      },
-    );
+"`\n\nSeed: `" + process.env.aomcSeed + "`");
   },
 } satisfies slash_command;
