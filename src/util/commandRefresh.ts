@@ -9,7 +9,7 @@ export = async (client: Client) =>
         : "https://discord.com/api",
     headers: {
       proxy_token: process.env.proxy_token,
-    })
+    }})
     .setToken(process.env.helper_bot_token)
     .put(Routes.applicationCommands((client.user as ClientUser).id), {
       body: readdirSync("./built/slash_commands")
