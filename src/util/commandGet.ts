@@ -9,6 +9,6 @@ export = async () =>
         : "https://discord.com/api",
     headers: {
       proxy_token: process.env.proxy_token,
-    })
+    }})
     .setToken(process.env.helper_bot_token)
     .get(Routes.applicationCommands("1562579605741764618"));
