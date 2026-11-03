@@ -15,9 +15,8 @@ export = {
           title: "Here you go!",
           description: "IP #1: `" + process.env.aomcOliverIp +
 "`\nIP #2: `" + process.env.aomcDioriteIp +
-"`\nIP #3: `" + process.env.aomcRawIp + "`"
-
-Seed: ${process.env.aomcSeed}`
+"`\nIP #3: `" + process.env.aomcRawIp +
+"`\n\nSeed: `" + process.env.aomcSeed + "`"
         }]
       },
     );
