@@ -21,7 +21,7 @@ export = async (message: Message) => {
       );
     }
     if (message.content === "!r") {
-      const originalName = groups?.originalName
+      const originalName = thread.name
         ?.replace(/ [\[\(]ready for pickup[\)\]]/i, "")
         .trim();
       thread.setName(originalName + " [Ready For Pickup]");
