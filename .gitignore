@@ -17,6 +17,7 @@ nbproject
 Thumbs.db
 
 /node_modules
+/built
 /tests
 /old
 **/1prefix

@@ -44,7 +44,7 @@ export = {
               },
             ],
           })
-          .catch(() => {});
+          .catch(console.error);
       };
       try {
         const random = Math.random() * 3;

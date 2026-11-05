@@ -6,6 +6,10 @@ declare global {
       proxyURL: string;
       proxy_token: string;
       useProxy: string;
+      aomcRawIp: string;
+      aomcDioriteIp: string;
+      aomcOliverIp: string;
+      aomcSeed: string;
     }
   }
 }

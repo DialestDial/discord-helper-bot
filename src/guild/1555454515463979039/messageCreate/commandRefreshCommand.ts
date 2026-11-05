@@ -1,3 +1,4 @@
+//Storage
 import { Message } from "discord.js";
 import commandRefresh from "../../../util/commandRefresh";
 import commandGet from "../../../util/commandGet";

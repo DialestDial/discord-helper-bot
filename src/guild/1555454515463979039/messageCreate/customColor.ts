@@ -1,4 +1,4 @@
-//AOMC Storage Server
+//Storage
 import customColor from "../../../util/customColor";
 import { Message } from "discord.js";
 export = async (message: Message) => {
