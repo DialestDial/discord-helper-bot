@@ -31,13 +31,29 @@ export = async (message: Message, normal: boolean) => {
         });
     }
   }
-  const prefix = prefixes.find((p) =>
+  const botId = message.client.user.id;
+  const botRoleId = message.guild?.roles.botRoleFor(botId)?.id;
+  const mentions = [`<@${botId}>`, `<@!${botId}>`];
+  if (botRoleId) mentions.push(`<@&${botRoleId}>`);
+  const prefix = [...prefixes, ...mentions].find((p) =>
     message?.content?.toLowerCase()?.startsWith(p),
   );
   const noPrefix = message.content.slice(prefix?.length).trim();
   const args = noPrefix.split(/\s+/g); //args === true in a text_command
   const commandName = (args.shift() || "").toLowerCase();
   const arg = noPrefix.slice(commandName.length).trim(); //args === null in a text_command
+
+  if (
+    normal &&
+    !commandName &&
+    prefix &&
+    mentions.includes(prefix) &&
+    !message.author.bot &&
+    message.channel.isSendable()
+  )
+    message.channel
+      .send(`My prefix is \`${prefixes[0]}\`, or ping me. Try \`${prefixes[0]}test\``)
+      .catch(() => {});
 
   const text_command: text_command | undefined = commands.find(
     (cmd) =>

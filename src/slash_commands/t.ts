@@ -47,7 +47,7 @@ export = {
 
         switch (round) {
           case "Y":
-            time.setUTCMonth(1);
+            time.setUTCMonth(0);
           case "N":
             time.setUTCDate(1);
           case "D":

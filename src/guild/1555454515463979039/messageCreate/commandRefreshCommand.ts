@@ -11,7 +11,7 @@ export = async (message: Message) => {
     commandRefresh(message.client)
       .then(async () =>
         console.log(
-          "Commands updated!\n" + inspect(await commandGet(), { depth: null }),
+          "Commands updated!\n" + inspect(await commandGet(message.client.user.id), { depth: null }),
         ),
       )
       .then(() => message.reply("Commands updated!"))

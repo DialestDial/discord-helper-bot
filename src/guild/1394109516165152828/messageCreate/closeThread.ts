@@ -14,8 +14,7 @@ export = async (message: Message) => {
         ?.replace(/ [\[\(]ready for pickup[\)\]]/i, "")
         ?.replace(/ [\[\(]ready on the warehouse[\)\]]/i, "")
         ?.trim();
-      thread.setName(originalName + " [Completed]");
-      thread.setArchived(true);
+      await thread.edit({ name: originalName + " [Completed]", archived: true });
       (thread.parent as TextChannel).send(
         `Thread <#${thread.id}> ${groups?.clientNumber ? `for client #${groups.clientNumber} ` : ""}has been closed!`,
       );

@@ -1,7 +1,7 @@
 import { REST, Routes } from "discord.js";
 import { inspect } from "util";
 
-export = async () =>
+export = async (appId: string) =>
   new REST({
     api:
       process.env.useProxy === "1"
@@ -11,4 +11,4 @@ export = async () =>
       proxy_token: process.env.proxy_token,
     }})
     .setToken(process.env.helper_bot_token)
-    .get(Routes.applicationCommands("1562579605741764618"));
+    .get(Routes.applicationCommands(appId));

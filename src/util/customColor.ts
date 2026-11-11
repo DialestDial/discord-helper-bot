@@ -1,39 +1,31 @@
-import {
-  ColorResolvable,
-  Guild,
-  GuildMember,
-  Role,
-  SendableChannels,
-} from "discord.js";
+import { Guild, GuildMember, Role, SendableChannels } from "discord.js";
 import { customColorOptions } from "../DTS/customColorOptions";
 import rateLimitAsText from "./rateLimitAsText";
 
 export = async (options: customColorOptions) => {
   const { _channel, prefixC, prefixR, message, position, embed } = options;
+  const isColorRole = (r: Role) =>
+    r.name.startsWith(prefixC) && /^#[\dA-F]{6}$/.test(r.name);
 
   async function cleanRoles(oldRole: Role | undefined) {
-    if (oldRole) {
-      await (message.member as GuildMember).roles
-        .remove(oldRole)
+    if (!oldRole) return;
+    await (message.member as GuildMember).roles
+      .remove(oldRole)
+      .catch(() =>
+        console.error(
+          `I don't have permissions to remove the role with the ID ${oldRole} from a user in ${oldRole.guild}`,
+        ),
+      );
+    // Role.members only reads the member cache
+    const fetched = await oldRole.guild.members.fetch().catch(() => null);
+    if (fetched && !oldRole.members.size)
+      await oldRole
+        .delete()
         .catch(() =>
           console.error(
-            `I don't have permissions to remove the role with the ID ${oldRole} from a user in ${oldRole.guild}`,
+            `I don't have permissions to delete the role with the ID ${oldRole} from ${oldRole.guild}`,
           ),
         );
-    }
-    (message.guild as Guild).roles.cache.forEach((r) => {
-      if (
-        (r.name.startsWith(prefixC) ||
-          (prefixR && r.name.startsWith(prefixR))) &&
-        !r.members.size
-      ) {
-        r.delete().catch(() =>
-          console.error(
-            `I don't have permissions to delete the role with the ID ${r} from ${r.guild}`,
-          ),
-        );
-      }
-    });
   }
 
   if (
@@ -44,23 +36,19 @@ export = async (options: customColorOptions) => {
     !message.author.bot
   ) {
     const { content } = message,
-      color = parseInt(content.toLowerCase().slice(1).trim(), 16);
+      color = parseInt(content.slice(1), 16);
     if (message.content === "reset" || message.content === "r") {
       const cuRole: Role | undefined =
         //current role that will later be removed
         (message.member as GuildMember).roles.cache.find(
           (r) =>
-            r.name.startsWith(prefixC) ||
-            (prefixR && r.name.startsWith(prefixR)),
+            isColorRole(r) || (!!prefixR && r.name.startsWith(prefixR)),
         );
-      cleanRoles(cuRole);
-      message.delete();
-    } else if (
-      content.search(/^#[a-f|\d]{6}$/i) !== -1 &&
-      color > 0 &&
-      color < 0x1000000 &&
-      content.length === 7
-    ) {
+      await cleanRoles(cuRole);
+      message.delete().catch(() => {});
+    } else if (/^#[\da-f]{6}$/i.test(content)) {
+      // Discord treats color 0 as "no color"
+      const roleColor = color || 1;
       function editEmbed(c: number) {
         if (embed)
           message.channel.messages.fetch(embed).then((m) => {
@@ -88,42 +76,36 @@ export = async (options: customColorOptions) => {
       }
 
       async function setColor(type: string, prefix: string) {
+        const member = message.member as GuildMember;
+        const guild = message.guild as Guild;
         const cuRole: Role | undefined =
           //current role that will later be removed
-          (message.member as GuildMember).roles.cache.find((r) =>
-            r.name.startsWith(prefix),
+          member.roles.cache.find((r) =>
+            type === "c" ? isColorRole(r) : r.name.startsWith(prefix),
           );
 
         if (type === "c") {
-          let newRole = (message.guild as Guild).roles.cache.find(
-            (r) => r.name === message.content.toUpperCase(),
-          );
-          if (newRole) {
-            await (message.member as GuildMember).roles.add(newRole);
-          } else
-            await (message.guild as Guild).roles
+          const name = content.toUpperCase();
+          const newRole =
+            guild.roles.cache.find((r) => r.name === name) ??
+            (await guild.roles
               .create({
-                name: message.content.toUpperCase(),
-                position:
-                  (message.guild as Guild).roles.cache.size - (position ?? 0),
+                name,
+                position: guild.roles.cache.size - (position ?? 0),
                 permissions: 0n,
-                colors: { primaryColor: message.content as ColorResolvable },
+                colors: { primaryColor: roleColor },
               })
-              .then(
-                async (r) => {
-                  await (message.member as GuildMember).roles.add(r);
-
-                  cleanRoles(cuRole);
-                  message.delete();
-                  editEmbed(r.colors.primaryColor);
-                },
-                () => error("create the role"),
-              );
+              .catch(() => undefined));
+          if (!newRole) return error("create the role");
+          if (!(await member.roles.add(newRole).then(() => true, () => false)))
+            return error("give you the role");
+          if (cuRole && cuRole.id !== newRole.id) await cleanRoles(cuRole);
+          message.delete().catch(() => {});
+          editEmbed(newRole.colors.primaryColor);
         } else {
-          (cuRole as Role).setColors({ primaryColor: color }).then(
+          (cuRole as Role).setColors({ primaryColor: roleColor }).then(
             () => {
-              cleanRoles(cuRole);
-              message.delete();
+              message.delete().catch(() => {});
               editEmbed((cuRole as Role).colors.primaryColor);
             },
             () => error("change the role's color"),
