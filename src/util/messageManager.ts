@@ -43,18 +43,6 @@ export = async (message: Message, normal: boolean) => {
   const commandName = (args.shift() || "").toLowerCase();
   const arg = noPrefix.slice(commandName.length).trim(); //args === null in a text_command
 
-  if (
-    normal &&
-    !commandName &&
-    prefix &&
-    mentions.includes(prefix) &&
-    !message.author.bot &&
-    message.channel.isSendable()
-  )
-    message.channel
-      .send(`My prefix is \`${prefixes[0]}\`, or ping me. Try \`${prefixes[0]}test\``)
-      .catch(() => {});
-
   const text_command: text_command | undefined = commands.find(
     (cmd) =>
       cmd.name === commandName ||
