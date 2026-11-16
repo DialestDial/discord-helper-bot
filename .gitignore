@@ -25,6 +25,7 @@ Thumbs.db
 .env
 coverage
 index.d.ts
+mailmap.txt
 
 logs
 *.log
