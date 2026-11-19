@@ -11,6 +11,7 @@ export = {
     interaction.reply("IP #1: `" + process.env.aomcDioriteIp +
 "`\nIP #2: `" + process.env.aomcOliverIp +
 "`\n\nSeed: `" + process.env.aomcSeed + "`" + 
-"\n\n Best Prices at Book Bank: https://discord.com/channels/1394109516165152828/1569912302394802256/1570099351450288229");
+"\n\nBest Prices at Book Bank: https://discord.com/channels/1394109516165152828/1569912302394802256/1570099351450288229\
+\n\nD3v1s0m's Tools: https://discord.com/channels/1394109516165152828/1394109516882251819/1572902605821313024");
   },
 } satisfies slash_command;
