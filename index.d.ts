@@ -10,6 +10,7 @@ declare global {
       aomcDioriteIp: string;
       aomcOliverIp: string;
       aomcSeed: string;
+      checklistSpreadsheet: string;
     }
   }
 }
